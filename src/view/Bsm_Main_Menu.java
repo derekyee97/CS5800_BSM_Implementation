@@ -37,8 +37,10 @@ public class Bsm_Main_Menu extends Application
 	
 	Region padderRegion = new Region();
 	Bsm_Registration_Menu registrationMenu=new Bsm_Registration_Menu();
+	Add_New_Item_Menu addItemMenu;
 	public void start(Stage myStage) 
 	{
+		addItemMenu=new Add_New_Item_Menu (myStage);
 		Scene myScene=new Scene(root,700,700);
 		menu.setAlignment(Pos.CENTER);
 		root.setLeft(padderRegion);
@@ -55,6 +57,11 @@ public class Bsm_Main_Menu extends Application
 		
 		registrationB.setOnAction(event->{
 			VBox test=registrationMenu.getMenu();
+			test.setAlignment(Pos.CENTER);
+			root.setCenter(test);
+		});
+		addItemB.setOnAction(event->{
+			VBox test=addItemMenu.getMenu();
 			test.setAlignment(Pos.CENTER);
 			root.setCenter(test);
 		});
