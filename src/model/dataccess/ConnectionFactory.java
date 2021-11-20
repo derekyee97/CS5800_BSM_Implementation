@@ -10,7 +10,7 @@ public class ConnectionFactory
 
 	final String USER = "postgres";
 
-	final String PWD = "123";
+	final String PWD = "@Test123";
 	public Connection getConnection() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("org.postgresql.Driver");

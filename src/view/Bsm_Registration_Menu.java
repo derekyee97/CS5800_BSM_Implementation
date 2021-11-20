@@ -1,9 +1,16 @@
 package view;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
+import org.hibernate.Session;
 
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -11,6 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import model.dataccess.BSM_Hibernate_ConnectionFactory;
+import model.entities.Customer;
+import model.entities.Professor;
+import model.entities.Student;
 
 public class Bsm_Registration_Menu 
 {
@@ -39,7 +50,7 @@ public class Bsm_Registration_Menu
 	Label phoneL=new Label("Phone Number"),addressL=new Label("Address"); 
 	Label broncoIDL=new Label("Bronco ID"),roleL=new Label("Role"); 
 	TextField firstNameField=new TextField("Enter first name"),lastNameField=new TextField("Enter last name");
-	TextField phoneField=new TextField("Enter phone number in (XXX)-XXX-XXX format"),addressField=new TextField("Enter address");
+	TextField phoneField=new TextField("Enter phone number in (XXX)-XXX-XXX format"),addressField=new TextField("Enter address"),broncoIDField=new TextField("Enter BroncoID");
 	DatePicker dateOfBirthField=new DatePicker();
 	ChoiceBox<String> roleField=new ChoiceBox<>(); 
 	//student fields 
@@ -62,7 +73,8 @@ public class Bsm_Registration_Menu
 		customerFields.add(dateOfBirthL,0, 2);customerFields.add(dateOfBirthField, 1, 2);
 		customerFields.add(phoneL,0, 3);customerFields.add(phoneField, 1, 3);
 		customerFields.add(addressL,0, 4);customerFields.add(addressField, 1, 4);
-		customerFields.add(roleL,0, 5);customerFields.add(roleField, 1, 5);
+		customerFields.add(broncoIDL, 0, 5);customerFields.add(broncoIDField, 1, 5);
+		customerFields.add(roleL,0, 6);customerFields.add(roleField, 1, 6);
 		
 		studentFields.add(startDateL, 0, 0);studentFields.add(startDateField, 1, 0);
 		studentFields.add(gradDateL, 0, 1);studentFields.add(gradDateField, 1, 1);
@@ -91,6 +103,68 @@ public class Bsm_Registration_Menu
 			}
 					
 		});
+		
+		registrationB.setOnAction(event->{
+			BSM_Hibernate_ConnectionFactory factory=new BSM_Hibernate_ConnectionFactory();
+			try {
+				Session session=factory.getSession();
+				Customer registerCustomer=new Customer(
+						Integer.parseInt(broncoIDField.getText()),
+						firstNameField.getText(),
+						lastNameField.getText(),
+						phoneField.getText(),
+						Date.from(dateOfBirthField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()		
+						));			
+				session.beginTransaction();
+				session.save(registerCustomer);
+				
+				if(roleField.getValue().equals("Student"))
+				{
+					Student registerStudent=new Student(
+							Integer.parseInt(broncoIDField.getText()),
+							majorField.getText(),
+							minorField.getText(),
+							Date.from(startDateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+							Date.from(startDateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())														
+							);
+					session.save(registerStudent);
+				}
+				else
+				{
+					Professor registerProfessor=new Professor(
+							Integer.parseInt(broncoIDField.getText()),
+							departmentField.getText(),
+							officeField.getText(),
+							researchField.getText()														
+							);
+					
+					session.save(registerProfessor);
+				}			
+				
+				session.getTransaction().commit();
+				
+				
+				
+				
+				
+				
+				Alert confirm=new Alert(AlertType.CONFIRMATION);
+				confirm.setContentText(roleField.getValue()+" added successfully!");
+				confirm.show();
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		});
+		
 	}
 	public VBox getMenu()
 	{

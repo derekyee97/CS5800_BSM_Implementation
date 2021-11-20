@@ -36,11 +36,14 @@ public class Bsm_Main_Menu extends Application
 	Button genReportB=new Button("Generate Report");
 	
 	Region padderRegion = new Region();
-	Bsm_Registration_Menu registrationMenu=new Bsm_Registration_Menu();
+	Bsm_Registration_Menu registrationMenu;
 	Add_New_Item_Menu addItemMenu;
+	Shop_Menu shopMenu;
 	public void start(Stage myStage) 
 	{
+		registrationMenu=new Bsm_Registration_Menu();
 		addItemMenu=new Add_New_Item_Menu (myStage);
+		shopMenu=new Shop_Menu();
 		Scene myScene=new Scene(root,700,700);
 		menu.setAlignment(Pos.CENTER);
 		root.setLeft(padderRegion);
@@ -49,12 +52,12 @@ public class Bsm_Main_Menu extends Application
 		menu.setAlignment(Pos.CENTER);
 		padderRegion.setPrefWidth(10);
 		root.setTop(menu);
-		
-		
+				
 		myStage.setScene(myScene);
 		myStage.setFullScreen(true);
 		myStage.show();
 		
+		//button functionalities
 		registrationB.setOnAction(event->{
 			VBox test=registrationMenu.getMenu();
 			test.setAlignment(Pos.CENTER);
@@ -65,8 +68,10 @@ public class Bsm_Main_Menu extends Application
 			test.setAlignment(Pos.CENTER);
 			root.setCenter(test);
 		});
-		
-		//button functionalities
+		storeB.setOnAction(event->{
+			HBox test=shopMenu.getMenu(); 
+			root.setCenter(test);
+		});
 		
 	}
 	
