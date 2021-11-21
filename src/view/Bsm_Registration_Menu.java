@@ -141,10 +141,7 @@ public class Bsm_Registration_Menu
 					session.save(registerProfessor);
 				}			
 				
-				session.getTransaction().commit();
-				
-				
-				
+				session.getTransaction().commit();			
 				
 				
 				

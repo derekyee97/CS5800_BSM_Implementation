@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import model.entities.Customer;
+import model.entities.HistoricalPrice;
+import model.entities.Item;
+import model.entities.ItemPicture;
 import model.entities.Professor;
 import model.entities.Student;
 
@@ -19,6 +22,9 @@ public class BSM_Hibernate_ConnectionFactory
             .addAnnotatedClass(Customer.class)
             .addAnnotatedClass(Student.class)
             .addAnnotatedClass(Professor.class)
+            .addAnnotatedClass(Item.class)
+            .addAnnotatedClass(ItemPicture.class)
+            .addAnnotatedClass(HistoricalPrice.class)
             .buildSessionFactory();
 
 	public Session getSession() throws ClassNotFoundException, SQLException
