@@ -60,7 +60,6 @@ public class Add_New_Item_Menu
 	HBox buttonHolder=new HBox(20);
 	Stage stageRef; 
 	List<File> images=new ArrayList<>();
-		
 	public Add_New_Item_Menu(Stage stage) //need a reference to stage for filechooser 
 	{
 		stageRef=stage;
@@ -71,7 +70,7 @@ public class Add_New_Item_Menu
 		pictureBox.getChildren().addAll(pictureL,pictureB);
 		pictureChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.jpg","*.png"));
 		buttonHolder.getChildren().addAll(submitB,cancelB); 
-		menu.getChildren().addAll(menuHeaderL,choiceHolder,productBox,priceBox,priceHolder,pictureBox,pictureHolder,buttonHolder);
+		menu.getChildren().addAll(menuHeaderL,choiceHolder,productBox,priceBox,priceHolder,pictureBox,pictureHolder,buttonHolder); 
 		
 		menu.setAlignment(Pos.CENTER);choiceHolder.setAlignment(Pos.CENTER);productBox.setAlignment(Pos.CENTER);
 		priceHolder.setAlignment(Pos.CENTER);pictureBox.setAlignment(Pos.CENTER);pictureHolder.setAlignment(Pos.CENTER);
@@ -93,7 +92,7 @@ public class Add_New_Item_Menu
 			pictureHolder.getChildren().add(chosenFile);
 			images.add(file);
 		});
-		
+	
 		submitB.setOnAction(event->{
 			BSM_Hibernate_ConnectionFactory factory=new BSM_Hibernate_ConnectionFactory();
 			try {

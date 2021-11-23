@@ -16,7 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /*************************************************
- * @author Derek Yee
  * This is the main class that is used to run the program. 
  * Utilizes JavaFX for GUI components.
  ************************************************/
