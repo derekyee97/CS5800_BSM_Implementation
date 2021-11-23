@@ -38,16 +38,18 @@ public class Bsm_Main_Menu extends Application
 	Bsm_Registration_Menu registrationMenu;
 	Add_New_Item_Menu addItemMenu;
 	Shop_Menu shopMenu;
+	Order_Management_Menu orderManagementMenu;
 	public void start(Stage myStage) 
 	{
 		registrationMenu=new Bsm_Registration_Menu();
 		addItemMenu=new Add_New_Item_Menu (myStage);
 		shopMenu=new Shop_Menu();
+		orderManagementMenu=new Order_Management_Menu(); 
 		Scene myScene=new Scene(root,700,700);
 		menu.setAlignment(Pos.CENTER);
 		root.setLeft(padderRegion);
 		
-		menu.getChildren().addAll(registrationB,storeB,addItemB,genReportB);
+		menu.getChildren().addAll(registrationB,storeB,orderManB,addItemB,genReportB);
 		menu.setAlignment(Pos.CENTER);
 		padderRegion.setPrefWidth(10);
 		root.setTop(menu);
@@ -70,6 +72,12 @@ public class Bsm_Main_Menu extends Application
 		storeB.setOnAction(event->{
 			HBox test=shopMenu.getMenu(); 
 			root.setCenter(test);
+		});
+		orderManB.setOnAction(event->{
+			orderManagementMenu.makeMenu();
+			VBox menu=orderManagementMenu.getMenu(); 
+			menu.setAlignment(Pos.CENTER);
+			root.setCenter(menu);
 		});
 		
 	}

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "items")
-public class Item 
+public class Item implements Comparable<Item>
 {
 	@Id //format when id is auto generated 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -55,5 +55,33 @@ public class Item
 	public String toString() {
 		return "Item [id=" + itemid + ", name=" + itemName + ", type=" + type + "]";
 	}
+	
+	
+    @Override 
+    public int compareTo(Item itemCompared)
+    {
+    	System.out.println("COMPARISON");
+        if (itemid==itemCompared.getId()) {
+ 
+            // item is the same 
+            return 0;
+        }
+        
+        else 
+        {
+ 
+            // item is different
+            return 1;
+        }
+    }
+    @Override
+    public boolean equals(Object obj) {
+ 
+        if(itemid==((Item)obj).getId())
+        {
+        	return true;
+        }
+        return false;
+    }
 	
 }

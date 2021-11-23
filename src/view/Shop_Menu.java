@@ -46,10 +46,12 @@ public class Shop_Menu
 	ImageView detailViewPic; 
 	Label itemName;
 	Label detailItemID,detailPrice; 
-	Button addToCartB=new Button("Add To Cart"); 
+	//Button addToCartB=new Button("Add To Cart"); 
 	Button closeDetailViewB=new Button("Close");
 	boolean isActive=false;
-	static HashSet<Item> cart=new HashSet<>();	
+	static HashSet<Integer> cart=new HashSet<>();	
+	static ArrayList<Item> actualCart=new ArrayList<>(); 
+	static ArrayList<Float> prices=new ArrayList<>();
 	@SuppressWarnings("deprecation")
 	public Shop_Menu()
 	{
@@ -105,6 +107,7 @@ public class Shop_Menu
 					Button itemButton=new Button(); 
 					itemButton.setPrefSize(60,60);
 					itemButton.setGraphic(view);
+					Button addToCartB=new Button("Add To Cart");
 					displayItemsBox.add(itemButton, column, row);
 										
 					column++;
@@ -142,14 +145,27 @@ public class Shop_Menu
 						
 
 						setDetailView();
+						itemDetailView.getChildren().add(4,addToCartB);
 						itemDetailView.setPadding(new Insets(10,10,10,500));
 						menu.getChildren().add(itemDetailView);
 					});
 					addToCartB.setOnAction(event2->{
-						cart.add(item);
-						Alert success=new Alert(AlertType.CONFIRMATION);
-						success.setContentText(itemName.getText()+" added to cart");
-						success.show();				
+						if(!cart.contains(item.getId()))
+						{
+							prices.add(Float.parseFloat(detailPrice.getText().substring(8)));
+							actualCart.add(item);
+							cart.add(item.getId());
+							Alert success=new Alert(AlertType.CONFIRMATION);
+							success.setContentText(itemName.getText()+" added to cart");
+							success.show();	
+							
+						}						
+						else
+						{
+							Alert error=new Alert(AlertType.ERROR);
+							error.setContentText(itemName.getText()+" is already in cart");
+							error.show();
+						}
 					});
 					
 				}
@@ -206,6 +222,7 @@ public class Shop_Menu
 					Button itemButton=new Button(); 
 					itemButton.setPrefSize(60,60);
 					itemButton.setGraphic(view);
+					Button addToCartB=new Button("Add to cart");
 					displayItemsBox.add(itemButton, column, row);
 										
 					column++;
@@ -243,14 +260,27 @@ public class Shop_Menu
 						
 
 						setDetailView();
+						itemDetailView.getChildren().add(4,addToCartB);
 						itemDetailView.setPadding(new Insets(10,10,10,500));
 						menu.getChildren().add(itemDetailView);
 					});
 					addToCartB.setOnAction(event2->{
-						cart.add(item);
-						Alert success=new Alert(AlertType.CONFIRMATION);
-						success.setContentText(itemName.getText()+" added to cart");
-						success.show();				
+						if(!cart.contains(item.getId()))
+						{
+							prices.add(Float.parseFloat(detailPrice.getText().substring(8)));
+							actualCart.add(item);
+							cart.add(item.getId());
+							Alert success=new Alert(AlertType.CONFIRMATION);
+							success.setContentText(itemName.getText()+" added to cart");
+							success.show();	
+							
+						}						
+						else
+						{
+							Alert error=new Alert(AlertType.ERROR);
+							error.setContentText(itemName.getText()+" is already in cart");
+							error.show();
+						}
 					});
 					
 				}
@@ -307,6 +337,7 @@ public class Shop_Menu
 					Button itemButton=new Button(); 
 					itemButton.setPrefSize(60,60);
 					itemButton.setGraphic(view);
+					Button addToCartB=new Button("Add to cart");
 					displayItemsBox.add(itemButton, column, row);
 										
 					column++;
@@ -344,14 +375,27 @@ public class Shop_Menu
 						
 
 						setDetailView();
+						itemDetailView.getChildren().add(4,addToCartB);
 						itemDetailView.setPadding(new Insets(10,10,10,500));
 						menu.getChildren().add(itemDetailView);
 					});
 					addToCartB.setOnAction(event2->{
-						cart.add(item);
-						Alert success=new Alert(AlertType.CONFIRMATION);
-						success.setContentText(itemName.getText()+" added to cart");
-						success.show();				
+						if(!cart.contains(item.getId()))
+						{
+							prices.add(Float.parseFloat(detailPrice.getText().substring(8)));
+							actualCart.add(item);
+							cart.add(item.getId());
+							Alert success=new Alert(AlertType.CONFIRMATION);
+							success.setContentText(itemName.getText()+" added to cart");
+							success.show();	
+							
+						}						
+						else
+						{
+							Alert error=new Alert(AlertType.ERROR);
+							error.setContentText(itemName.getText()+" is already in cart");
+							error.show();
+						}
 					});
 					
 				}
@@ -409,6 +453,7 @@ public class Shop_Menu
 					Button itemButton=new Button(); 
 					itemButton.setPrefSize(60,60);
 					itemButton.setGraphic(view);
+					Button addToCartB=new Button("Add to cart");
 					displayItemsBox.add(itemButton, column, row);
 										
 					column++;
@@ -446,14 +491,28 @@ public class Shop_Menu
 						
 
 						setDetailView();
+						itemDetailView.getChildren().add(4,addToCartB);  
 						itemDetailView.setPadding(new Insets(10,10,10,500));
 						menu.getChildren().add(itemDetailView);
 					});
 					addToCartB.setOnAction(event2->{
-						cart.add(item);
-						Alert success=new Alert(AlertType.CONFIRMATION);
-						success.setContentText(itemName.getText()+" added to cart");
-						success.show();				
+						if(!cart.contains(item.getId()))
+						{
+							prices.add(Float.parseFloat(detailPrice.getText().substring(8)));
+							actualCart.add(item);
+							cart.add(item.getId());
+							Alert success=new Alert(AlertType.CONFIRMATION);
+							success.setContentText(itemName.getText()+" added to cart");
+							success.show();	
+							
+						}						
+						else
+						{
+							Alert error=new Alert(AlertType.ERROR);
+							error.setContentText(itemName.getText()+" is already in cart");
+							error.show();
+						}
+						
 					});
 					
 				}
@@ -511,7 +570,7 @@ public class Shop_Menu
 					itemButton.setPrefSize(60,60);
 					itemButton.setGraphic(view);
 					displayItemsBox.add(itemButton, column, row);
-										
+					Button addToCartB=new Button("Add To Cart");					
 					column++;
 					if(column%3==0)
 					{
@@ -547,14 +606,28 @@ public class Shop_Menu
 						
 
 						setDetailView();
+						itemDetailView.getChildren().add(4,addToCartB);   
 						itemDetailView.setPadding(new Insets(10,10,10,500));
 						menu.getChildren().add(itemDetailView);
 					});
 					addToCartB.setOnAction(event2->{
-						cart.add(item);
-						Alert success=new Alert(AlertType.CONFIRMATION);
-						success.setContentText(itemName.getText()+" added to cart");
-						success.show();				
+						
+						if(!cart.contains(item.getId()))
+						{
+							prices.add(Float.parseFloat(detailPrice.getText().substring(8)));
+							actualCart.add(item);
+							cart.add(item.getId());
+							Alert success=new Alert(AlertType.CONFIRMATION);
+							success.setContentText(itemName.getText()+" added to cart");
+							success.show();	
+							
+						}						
+						else
+						{
+							Alert error=new Alert(AlertType.ERROR);
+							error.setContentText(itemName.getText()+" is already in cart");
+							error.show();
+						}									
 					});
 					
 				}
@@ -584,7 +657,7 @@ public class Shop_Menu
 	private void setDetailView()
 	{
 		itemDetailView.getChildren().clear(); //clear detail view 
-		itemDetailView.getChildren().addAll(detailViewPic,itemName,detailItemID,detailPrice,addToCartB,closeDetailViewB);
+		itemDetailView.getChildren().addAll(detailViewPic,itemName,detailItemID,detailPrice,closeDetailViewB);
 		itemDetailView.setAlignment(Pos.CENTER);
 	}	
 }
