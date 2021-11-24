@@ -550,6 +550,7 @@ public class Shop_Menu
 				{
 					Image image; 
 					ImageView view;
+					int priceID; 
 					Criteria picCriteria=session.createCriteria(ItemPicture.class);
 					picCriteria.add(Restrictions.eq("itemID", item.getId()));
 					List<ItemPicture> pictures=picCriteria.list();

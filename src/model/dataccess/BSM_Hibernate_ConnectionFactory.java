@@ -12,6 +12,8 @@ import model.entities.Customer;
 import model.entities.HistoricalPrice;
 import model.entities.Item;
 import model.entities.ItemPicture;
+import model.entities.Order;
+import model.entities.OrderItems;
 import model.entities.Professor;
 import model.entities.Student;
 
@@ -25,6 +27,8 @@ public class BSM_Hibernate_ConnectionFactory
             .addAnnotatedClass(Item.class)
             .addAnnotatedClass(ItemPicture.class)
             .addAnnotatedClass(HistoricalPrice.class)
+            .addAnnotatedClass(Order.class)
+            .addAnnotatedClass(OrderItems.class)
             .buildSessionFactory();
 
 	public Session getSession() throws ClassNotFoundException, SQLException
