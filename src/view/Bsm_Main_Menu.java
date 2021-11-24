@@ -39,9 +39,11 @@ public class Bsm_Main_Menu extends Application
 	Add_New_Item_Menu addItemMenu;
 	Shop_Menu shopMenu;
 	Order_Management_Menu orderManagementMenu;
+	Generate_Report_Menu genReportMenu;
 	public void start(Stage myStage) 
 	{
 		registrationMenu=new Bsm_Registration_Menu();
+		genReportMenu=new Generate_Report_Menu();
 		addItemMenu=new Add_New_Item_Menu (myStage);
 		shopMenu=new Shop_Menu();
 		orderManagementMenu=new Order_Management_Menu(); 
@@ -78,6 +80,11 @@ public class Bsm_Main_Menu extends Application
 			VBox menu=orderManagementMenu.getMenu(); 
 			menu.setAlignment(Pos.CENTER);
 			root.setCenter(menu);
+		});
+		genReportB.setOnAction(event->{
+			genReportMenu=new Generate_Report_Menu();
+			VBox test=genReportMenu.getMenu();
+			root.setCenter(test);
 		});
 		
 	}

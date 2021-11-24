@@ -56,7 +56,6 @@ public class Order_Management_Menu
 	GridPane itemsCartView=new GridPane(); 
 	BSM_Hibernate_ConnectionFactory factory=new BSM_Hibernate_ConnectionFactory();
 	List<Item> itemList;
-
 	float subTotal;
 	float discountedTotal;
 	
@@ -80,7 +79,7 @@ public class Order_Management_Menu
 		{
 			menu.getChildren().add(emptyCart);
 			emptyCart.setAlignment(Pos.CENTER);
-		}
+		}		
 		else
 		{
 			HBox cartLabels=new HBox(50); 
@@ -207,7 +206,7 @@ public class Order_Management_Menu
 							OrderItems newOrderItem=new OrderItems(newOrder.getOrderID(),broncoId,Integer.parseInt(itemIDL.getText()),orderItemPrice,historyPriceID,quantity);
 							session.save(newOrderItem);
 							priceIndex+=5;quantityIndex+=5;itemID+=5;
-							System.out.println("HERE");
+							
 						}
 						session.getTransaction().commit();			
 						
