@@ -3,8 +3,11 @@ package view;
 import java.awt.ContainerOrderFocusTraversalPolicy;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -116,18 +119,54 @@ public class Generate_Report_Menu
 				else
 				{
 					Date startDate=Date.from(startRange.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-					Date endDate=Date.from(endRange.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-					List<Order>filteredOrders=new ArrayList<>(); 	
-				
+					Date endDate=Date.from(endRange.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());					
+					List<Order>filteredOrders=new ArrayList<>(); 					
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
+//					int year=startDate.getYear()+1900; 
+//					int month=startDate.getMonth()+1;
+//					String monthString="";
+//					if(month<10)
+//					{
+//						monthString+="0"; 
+//						monthString+=month;
+//					}
+//					else
+//					{
+//						monthString+=month;
+//					}
+//					int day=startDate.getDate(); 
+//					String dayString="";
+//					if(day<10)
+//					{
+//						dayString+="0";
+//						dayString+=day; 
+//					}
+//					else
+//					{
+//						dayString+=day;
+//					}
+//					String startString=year+"-"+monthString+"-"+dayString;
+//					try {
+//						startDate=sdf.parse(startString);
+//						System.out.println("YES");
+//					} catch (ParseException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+				//	Date start=sdf.parse(startDate.toString().substring(0,9));
 					for(Order order: customerOrders)
 					{
-						if(order.getDate().compareTo(startDate)>=0)
+						
+						if(order.getDate().after(startDate))
 						{
-							if(order.getDate().compareTo(endDate)<=0)
+							
+							if(order.getDate().before(endDate))
 							{
 								filteredOrders.add(order);
+								
 							}
-						}					
+						}
+					
 					}
 					if(filteredOrders.size()==0)
 					{

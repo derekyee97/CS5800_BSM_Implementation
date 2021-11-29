@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.jasper.tagplugins.jstl.core.If;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.engine.jdbc.BinaryStream;
 
@@ -130,13 +131,18 @@ public class Shop_Menu
 						//getting price 
 						Criteria priceCriteria=session.createCriteria(HistoricalPrice.class);
 						priceCriteria.add(Restrictions.eq("itemid", item.getId()));
+						priceCriteria.addOrder(Order.desc("startDate"));
 						List<HistoricalPrice> prices=priceCriteria.list();
+						for(HistoricalPrice price: prices)
+						{
+							System.out.println(price.getPrice());
+						}
 						Calendar cal=Calendar.getInstance();  //just want date not time 
 						cal.set(Calendar.HOUR_OF_DAY,0);cal.set(Calendar.MINUTE,0);cal.set(Calendar.SECOND,0);cal.set(Calendar.MILLISECOND,0);
 						Date today=cal.getInstance().getTime();
 						for(HistoricalPrice historicalPrice: prices)
 						{
-							if(today.compareTo(historicalPrice.getStart())>=0) //0 if same, 1 if after 
+							if(today.after(historicalPrice.getStart())) //0 if same, 1 if after 
 							{
 								detailPrice=new Label("Price: $"+historicalPrice.getPrice());
 								break;
