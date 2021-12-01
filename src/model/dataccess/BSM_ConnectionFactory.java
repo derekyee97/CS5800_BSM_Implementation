@@ -11,7 +11,7 @@ public class BSM_ConnectionFactory
 
 	final String USER = "postgres";
 
-	final String PWD = "@Test123";
+	final String PWD = "Winter005#";
 	public Connection getConnection() throws ClassNotFoundException, SQLException
 	{
 		Class.forName("org.postgresql.Driver");
